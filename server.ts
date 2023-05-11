@@ -14,6 +14,8 @@
       returnDate?: Date;
       price?: number;
       airline?: string;
+      flightNumber?:number;
+
       }
       
     
@@ -27,7 +29,8 @@
       if (closeButton) {
         await closeButton.click();
       }
-    
+  
+
       // Fill in origin and destination
       await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -60,18 +63,26 @@
       await page.$eval('#yDmH0d > c-wiz.zQTmif.SSPGKf > div > div:nth-child(2) > c-wiz > div.cKvRXe > c-wiz > div.vg4Z0e > div:nth-child(1) > div.SS6Dqf.POQx1c > div.AJxgH > div > div.rIZzse > div.bgJkKe.K0Tsu > div > div > div.cQnuXe.k0gFV > div > div > div:nth-child(1) > div > div.oSuIZ.YICvqf.lJODHb.qXDC9e > div > input',
       (el:any, value:any) => el.value = value, '25/10/2023')
       
-      
-      
       // Submit the form 
       
       
       await new Promise(resolve => setTimeout(resolve, 2000));
       const submitButton = await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/button');
       await submitButton[0].click();
+      
+      await new Promise(resolve => setTimeout(resolve, 2000));
+        console.log('before identifying')
+        const flight = await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[2]/div[5]/ul');
+        const flightss = await flight[0].$$('li');
+        console.log('working so far....')
+        for (const i of flightss) {
+          console.log('loop')
+          console.log(await i.evaluate((node:any) => node.textContent));
+        }
+
+
+            // Wait for search results to load
       await new Promise(resolve => setTimeout(resolve, 500000));
-  await page.waitForNavigation()
-      // Wait for search results to load
-      await page.waitForSelector('.gws-flights-results__itinerary-card-summary', { visible: true });
       const { document } = new JSDOM('').window;
 
       const flights = await page.evaluate(() => {
