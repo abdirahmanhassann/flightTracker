@@ -1,65 +1,105 @@
-const puppeteer = require('puppeteer');
-const express = require('express');
-const app = express();
-const jsdom = require('jsdom');
-const { JSDOM } = jsdom;
+      const puppeteer = require('puppeteer');
+      const express = require('express');
+      const app = express();
+      const jsdom = require('jsdom');
+      const { JSDOM } = jsdom; 
+   
+      interface Flight {
+      origin?: string;
+      destination?: string;
+      departureTime?: Date;
+      departureAirport?: string;
+      arrivalTime?: Date;
+      arrivalAirport?: string;
+      returnDate?: Date;
+      price?: number;
+      airline?: string;
+      }
+      
+    
+      async function run() {
+      const browser = await puppeteer.launch({headless:false});
+      const page = await browser.newPage();
+      await page.goto('https://www.google.com/travel/flights');
+    
+      // Close popup if it appears
+      const closeButton = await page.$('button[aria-label="Close"]');
+      if (closeButton) {
+        await closeButton.click();
+      }
+    
+      // Fill in origin and destination
+      
+      const input = await page.$x('//*[@id="i15"]/div[1]/div/div/div[1]/div/div/input');
+      await input[0].click();
+      await page.keyboard.press('End'); // move cursor to the end of the input
+      await page.keyboard.down('Shift'); // hold shift key
+      for (let i = 0; i < 20; i++) { // delete characters
+          await page.keyboard.press('Backspace');
+      }
+      await page.keyboard.up('Shift'); // release shift key
+      await page.keyboard.type('london')
+      await page.keyboard.press('ArrowRight')
+      await page.keyboard.press('Enter')
 
-interface Flight {
-  origin?: string;
-  destination?: string;
-  departureTime?: Date;
-  departureAirport?: string;
-  arrivalTime?: Date;
-  arrivalAirport?: string;
-  returnDate?: Date;
-  price?: number;
-  airline?: string;
-}
+      
+      const input2= await page.$x('//*[@id="i15"]/div[4]/div/div/div[1]/div/div/input')
+      await input2[0].click();
+      await page.keyboard.press('End'); // move cursor to the end of the input
+      await page.keyboard.down('Shift'); // hold shift key
+      for (let i = 0; i < 20; i++) { // delete characters
+          await page.keyboard.press('Backspace');
+      }
+      await page.keyboard.up('Shift'); // release shift key
+      await page.keyboard.type('istanbul')
+      await page.keyboard.press('ArrowRight')
+      await page.keyboard.press('Enter')      
+      await new Promise(resolve => setTimeout(resolve, 500000));
+      await page.$eval('#yDmH0d > c-wiz.zQTmif.SSPGKf > div > div:nth-child(2) > c-wiz > div.cKvRXe > c-wiz > div.vg4Z0e > div:nth-child(1) > div.SS6Dqf.POQx1c > div.AJxgH > div > div.rIZzse > div.bgJkKe.K0Tsu > div > div > div.cQnuXe.k0gFV > div > div > div:nth-child(1) > div > div.oSuIZ.YICvqf.kStSsc.ieVaIb > div > input',
+      (el:any, value:any) => el.value = value, '25/07/2023')
+      await page.$eval('#yDmH0d > c-wiz.zQTmif.SSPGKf > div > div:nth-child(2) > c-wiz > div.cKvRXe > c-wiz > div.vg4Z0e > div:nth-child(1) > div.SS6Dqf.POQx1c > div.AJxgH > div > div.rIZzse > div.bgJkKe.K0Tsu > div > div > div.cQnuXe.k0gFV > div > div > div:nth-child(1) > div > div.oSuIZ.YICvqf.lJODHb.qXDC9e > div > input',
+      (el:any, value:any) => el.value = value, '25/10/2023')
+      
+      
+      
+      // Submit the form 
+      
+      await new Promise(resolve => setTimeout(resolve, 500000));
 
-async function run() {
-  const browser = await puppeteer.launch({headless:false});
-  const page = await browser.newPage();
-  await page.goto('https://www.cheapflights.com/');
-  await page.waitForSelector('//*[@id="popover"]/div/div[2]/div[1]/div[2]/div/input');
-  const inputElement = await page.$x('//*[@id="popover"]/div/div[2]/div[1]/div[2]/div/input');
-  await inputElement[0].type('New York');
-      await page.type('#search-to', 'Los Angeles');
+  const submitButton = await page.$('#yDmH0d > c-wiz.zQTmif.SSPGKf > div > div:nth-child(2) > c-wiz > div.cKvRXe > c-wiz > div.vg4Z0e > div:nth-child(1) > div.SS6Dqf.POQx1c > div.MXvFbd > div > button');
+  await submitButton.click();
+  await page.waitForNavigation()
+      // Wait for search results to load
+      await page.waitForSelector('.gws-flights-results__itinerary-card-summary', { visible: true });
+      const { document } = new JSDOM('').window;
 
-  // Select departure and return dates
-  await page.click('#search-depart-input');
-  await page.click('.day[data-date="2022-06-01"]');
-  await page.click('.day[data-date="2022-06-15"]');
-
-  // Submit the form
-  await page.click('#submit');
-  const flights = await page.evaluate(() => {
-    const { document } = new JSDOM('').window;
-
-    const results: Flight[] = [];
-
-    document.querySelectorAll('.result .card-body').forEach((card: any) => {
-      const flight: Flight = {};
-
-      flight.airline = card.querySelector('.airline-name')?.textContent.trim();
-      flight.price = parseFloat(card.querySelector('.price-text')?.textContent.replace(/\D/g, '') ?? '0');
-      flight.departureTime = card.querySelector('.depart-time')?.textContent.trim();
-      flight.departureAirport = card.querySelector('.depart-airport')?.textContent.trim();
-      flight.arrivalTime = card.querySelector('.arrival-time')?.textContent.trim();
-      flight.arrivalAirport = card.querySelector('.arrival-airport')?.textContent.trim();
-
-      results.push(flight);
-    });
-
-    return results;
-  });
-
-  console.log(flights);
-
-  await browser.close();
-}
-
-run();
-
-app.listen(5000, () => {
-  console.log('listening on port', 5000);
-});
+      const flights = await page.evaluate(() => {
+        const results: Flight[] = [];
+    
+        document.querySelectorAll('.gws-flights-results__itinerary-card-summary').forEach((card: any) => {
+          const flight: Flight = {};
+    
+          const priceString = card.querySelector('.gws-flights-results__price')?.textContent.trim() ?? '';
+          flight.price = parseFloat(priceString.replace(/[^0-9.-]+/g, ''));
+    
+          const departure = card.querySelector('.gws-flights-results__times')?.firstChild?.textContent.trim() ?? '';
+          [flight.departureTime, flight.departureAirport] = departure.split(' from ');
+    
+          const arrival = card.querySelector('.gws-flights-results__times')?.lastChild?.textContent.trim() ?? '';
+          [flight.arrivalTime, flight.arrivalAirport] = arrival.split(' to ');
+    
+          flight.airline = card.querySelector('.gws-flights-results__airline-name')?.textContent.trim();
+    
+          results.push(flight);
+        });
+    
+        return results;
+      });
+    
+      console.log(flights);
+    
+      await browser.close();
+    }
+    
+    run();
+    
