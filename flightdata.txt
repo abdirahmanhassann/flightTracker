@@ -1,176 +1,66 @@
-10:20 PM
-CPH
-11:15 PM
-STN
-TRY 2,738
-round trip
-Nonstop1 hr 55 minRyanair
--23% emissions
+4:45 PM,STN,10:25 PM,SAW,TRY 5,883,round trip,Nonstop3 hr 40 minPegasus,Avg emissions
  
  
-7:55 AM
-CPH
-9:15 AM
-LGW
-SEPARATE TICKETS BOOKED TOGETHER
-TRY 3,557
-round trip
-Nonstop2 hr 20 minNorwegian
--16% emissions
+2:40 PM,STN,8:20 PM,SAW,TRY 6,104,round trip,Nonstop3 hr 40 minPegasus,Avg emissions
  
  
-4:25 PM
-CPH
-5:20 PM
-STN
-TRY 3,637
-round trip
-Nonstop1 hr 55 minRyanair
--6% emissions
+12:05 PM,STN,5:45 PM,SAW,TRY 6,208,round trip,Nonstop3 hr 40 minPegasus,Avg emissions
  
  
-9:35 AM
-CPH
-4:25 PM
-LHR
-TRY 3,899
-round trip
-1 stop7 hr 50 minEurowings
-+48% emissions
+8:00 PM,LTN,10:10 AM+1,IST,SEPARATE TICKETS BOOKED TOGETHER,TRY 6,236,round trip,1 stop12 hr 10 minWizz Air
  
  
-9:00 PM
-CPH
-10:05 PM
-LGW
-TRY 3,976
-round trip
-Nonstop2 hr 5 mineasyJet
-Avg emissions
+8:05 PM,LGW,10:05 AM+1,IST,SEPARATE TICKETS BOOKED TOGETHER,TRY 6,236,round trip,1 stop12 hrCorendon, Turkish Airlines,+53% emissions
  
  
-7:25 PM
-CPH
-8:20 PM
-LGW
-SEPARATE TICKETS BOOKED TOGETHER
-TRY 4,328
-round trip
-Nonstop1 hr 55 minNorwegian
--16% emissions
+10:10 AM,LGW,4:15 PM,IST,SEPARATE TICKETS BOOKED TOGETHER,TRY 6,579,round trip,Nonstop4 hr 5 minWizz Air,Avg emissions
  
  
-1:55 PM
-CPH
-2:50 PM
-LGW
-SEPARATE TICKETS BOOKED TOGETHER
-TRY 4,584
-round trip
-Nonstop1 hr 55 minNorwegian
--16% emissions
+1:50 PM,LGW,7:40 PM,IST,TRY 7,681,round trip,Nonstop3 hr 50 minTurkish Airlines,Avg emissions
  
  
-9:20 PM
-CPH
-10:20 PM
-LHR
-TRY 4,910
-round trip
-Nonstop2 hrBritish Airways
--17% emissions
+5:00 PM,LGW,10:55 PM,IST,TRY 7,681,round trip,Nonstop3 hr 55 minTurkish Airlines,Avg emissions
  
  
-3:00 PM
-CPH
-4:00 PM
-LHR
-TRY 4,938
-round trip
-Nonstop2 hrScandinavian AirlinesOperated by Sas Connect
--21% emissions
+11:50 AM,STN,5:45 PM,SAW,SEPARATE TICKETS BOOKED TOGETHER,TRY 7,692,round trip,Nonstop3 hr 55 minTurkish AirlinesOperated by 6Y for Anadolujet Trademark of TK,Avg emissions
  
  
-5:25 PM
-CPH
-6:20 PM
-LGW
-TRY 5,304
-round trip
-Nonstop1 hr 55 minNorwegian
--16% emissions
+3:55 PM,STN,9:40 PM,SAW,SEPARATE TICKETS BOOKED TOGETHER,TRY 7,692,round trip,Nonstop3 hr 45 minTurkish AirlinesOperated by Anadolujet Trademark of Turkish Airlines,-18% emissions
  
  
-7:20 AM
-CPH
-8:30 AM
-LHR
-TRY 5,367
-round trip
-Nonstop2 hr 10 minBritish Airways
-+19% emissions
+1:25 PM,LHR,7:15 PM,IST,TRY 9,276,round trip,Nonstop3 hr 50 minTurkish Airlines,Avg emissions
  
  
-4:40 PM
-CPH
-5:40 PM
-LHR
-TRY 5,652
-round trip
-Nonstop2 hrScandinavian AirlinesOperated by Sas Connect
--21% emissions
+4:40 PM,LHR,10:30 PM,IST,TRY 9,276,round trip,Nonstop3 hr 50 minTurkish Airlines,+8% emissions
  
  
-6:30 PM
-CPH
-7:30 PM
-LHR
-TRY 5,652
-round trip
-Nonstop2 hrScandinavian AirlinesOperated by Sas Connect
--19% emissions
+6:30 PM,LHR,12:10 AM+1,IST,TRY 9,276,round trip,Nonstop3 hr 40 minTurkish Airlines,-11% emissions
  
  
-8:40 PM
-CPH
-9:40 PM
-LHR
-TRY 5,652
-round trip
-Nonstop2 hrScandinavian AirlinesOperated by Sas Connect
--21% emissions
+6:55 PM,LHR,12:50 AM+1,IST,TRY 9,276,round trip,Nonstop3 hr 55 minTurkish Airlines,Avg emissions
  
  
-11:00 AM
-CPH
-12:05 PM
-LHR
-TRY 5,857
-round trip
-Nonstop2 hr 5 minBritish Airways
-Avg emissions
+10:10 PM,LHR,3:55 AM+1,IST,TRY 9,276,round trip,Nonstop3 hr 45 minTurkish Airlines,Avg emissions
  
  
-1:45 PM
-CPH
-2:45 PM
-LHR
-TRY 6,605
-round trip
-Nonstop2 hrBritish Airways
-Avg emissions
+6:30 PM,LHR,12:35 AM+1,IST,TRY 9,579,round trip,Nonstop4 hr 5 minBritish Airways,Avg emissions
  
  
-4:25 PM
-CPH
-5:25 PM
-LHR
-TRY 7,148
-round trip
-Nonstop2 hrBritish Airways
-Avg emissions
+10:50 AM,LGW,4:40 PM,IST,TRY 9,656,round trip,Nonstop3 hr 50 minTurkish Airlines,Avg emissions
  
  
-194 more flights
+6:45 AM,LHR,12:35 PM,IST,TRY 9,935,round trip,Nonstop3 hr 50 minTurkish Airlines,Avg emissions
+ 
+ 
+11:25 AM,LHR,5:05 PM,IST,TRY 9,935,round trip,Nonstop3 hr 40 minTurkish Airlines,+8% emissions
+ 
+ 
+1:10 PM,LHR,7:20 PM,IST,TRY 12,578,round trip,Nonstop4 hr 10 minBritish Airways,Avg emissions
+ 
+ 
+10:25 AM,LHR,4:35 PM,IST,TRY 19,332,round trip,Nonstop4 hr 10 minBritish Airways,-16% emissions
+ 
+ 
+Hide 276 flights
  
  
