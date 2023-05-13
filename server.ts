@@ -1,4 +1,4 @@
-      const puppeteer = require('puppeteer');
+    const puppeteer = require('puppeteer');
       const express = require('express');
       const app = express();
       const jsdom = require('jsdom');
@@ -16,11 +16,12 @@
       price?: number;
       airline?: string;
       flightNumber?:number;
-      ticketBooking?:string
+      ticketBooking?:string;
+      duration?:string
       }
       
     const destination1='copenhagen';
-    const destination2='berlin';
+    const destination2='london';
       async function run() {
       const browser = await puppeteer.launch({headless:false});
       const page = await browser.newPage();
@@ -85,26 +86,51 @@
       const arrayofflights:Flight[]=[]
       for (const i of flightss) {
         const textContent = await i.evaluate((node:any) => node.innerText);
+      const textLines = textContent.split("\n");
 
-        
-        const textLines = textContent.split("\n");
-        const match = textLines[6] ? textLines[6].match(/\d+\s+(hr|min)/g) : null;
-        
+  ///   const durationRegex = /(\d+)\s*(hr|min)\s*([\w\s]+?)(?=\d|$)/g;
+  
+  let airline ;
+  let duration ;
+  let price;
+  let booking
+console.log(textLines[6])
+  if(textLines[6] && textLines[6].includes('min'))
+  {
+  airline=textLines[6].substring(textLines[6].indexOf('min') + 3);
+  
+}
+else if(textLines[6] && textLines[6].includes('hr')){
+  airline=textLines[6].substring(textLines[6].indexOf('hr') + 2);
+  
+  }
+  
+  if(textLines[5]&& textLines[5].includes('TRY')){
+price=textLines[5]
+booking=textLines[4]
+}
+else if(textLines[4]&& textLines[4].includes('TRY')){
+  price=textLines[4]
+  booking=textLines[5]
+  }
+    
+
         let flightObj :Flight = {
           departureTime:textLines[0],
           departureAirport:textLines[1],
           arrivalTime:textLines[2],
           arrivalAirport:textLines[3],
-          ticketBooking:textLines[4],
-          price:textLines[5],
-          airline:match
-        };
+          ticketBooking:booking,
+          price:price,
+          airline:airline
+        }
 
         arrayofflights.push(flightObj)
         const buffer = Buffer.from(textContent + '\n \n \n', 'utf-8');
-   await stream.write(buffer);
+        await stream.write(buffer);
         console.log(flightObj)
       }
+
 //console.log(arrayofflights)
 
       stream.end();
