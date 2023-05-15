@@ -1,42 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Signika+Negative:wght@600&display=swap');
+
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  min-height: 100vh;
+  margin-top: 16px;
+  background: #05203c;
+  width: 100%;
+  font-family:sans-serif;
+color:white;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+nav{
+  position: absolute;
+  top: 0px;
+  height: 48px;
+  width: 100%;
+  left: 0px;
+  background: #05203c;
+  font-family: 'Signika Negative', sans-serif;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.rowdiv{
+  text-align: justify;
+    padding-inline: 50px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    font-size: 30px;
+    color: white;
+    align-items: center;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.columndiv{
+  display: flex;
+  flex-direction: column;
+  margin-top: 54px;
+  gap: 20px;
+  align-items: center;
 }
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.columndiv2{
+  background: white;
+  padding: 20px;
+  width: 400px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  margin-top: 54px;
+  gap: 20px;
+  border-radius: 10px;
+  color: #05203c;
 }

@@ -1,15 +1,9 @@
-5:00 PM,DUB,6:20 PM,STN,TRY 649,round trip,Nonstop1 hr 20 minRyanair,-16% emissions
+10:05 AM,MGQ,8:35 PM,LHR,TRY 24,582,round trip,1 stop12 hr 30 minTurkish Airlines,-15% emissions
  
  
-8:20 AM,DUB,9:35 AM,LTN,TRY 743,round trip,Nonstop1 hr 15 minRyanair,Avg emissions
+12:50 PM,MGQ,12:35 PM+1,LGW,TRY 24,674,round trip,1 stop25 hr 45 minflydubai, Emirates,+6% emissions
  
  
-7:15 PM,DUB,8:30 PM,LTN,TRY 763,round trip,Nonstop1 hr 15 minRyanair,Avg emissions
- 
- 
-8:15 PM,DUB,9:30 PM,LTN,TRY 767,round trip,Nonstop1 hr 15 minRyanair,Avg emissions
- 
- 
-7:00 AM,DUB,8:40 AM,LGW,TRY 1,292,round trip,Nonstop1 hr 40 minAer LingusBritish Airways,+10% emissions
+2:15 PM,MGQ,9:05 AM+1,LHR,TRY 24,846,round trip,1 stop20 hr 50 minEthiopian,-22% emissions
  
  
