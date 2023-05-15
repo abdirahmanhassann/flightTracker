@@ -1,4 +1,6 @@
 const express=require('express');
 const returnFlight=require('./returnFlight');
 
-returnFlight('london','istanbul')
+ const newfligh= new returnFlight();
+ newfligh.returnFlight('dublin','london')
+ 

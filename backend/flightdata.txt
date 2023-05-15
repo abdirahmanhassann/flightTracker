@@ -1,0 +1,15 @@
+5:00 PM,DUB,6:20 PM,STN,TRY 649,round trip,Nonstop1 hr 20 minRyanair,-16% emissions
+ 
+ 
+8:20 AM,DUB,9:35 AM,LTN,TRY 743,round trip,Nonstop1 hr 15 minRyanair,Avg emissions
+ 
+ 
+7:15 PM,DUB,8:30 PM,LTN,TRY 763,round trip,Nonstop1 hr 15 minRyanair,Avg emissions
+ 
+ 
+8:15 PM,DUB,9:30 PM,LTN,TRY 767,round trip,Nonstop1 hr 15 minRyanair,Avg emissions
+ 
+ 
+7:00 AM,DUB,8:40 AM,LGW,TRY 1,292,round trip,Nonstop1 hr 40 minAer LingusBritish Airways,+10% emissions
+ 
+ 

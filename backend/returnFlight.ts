@@ -21,7 +21,11 @@ ticketBooking?:string;
 duration?:string
 }
 
-async function run(destination1:string,destination2:string) {
+ class Run {
+
+  async returnFlight(destination1:string,destination2:string){
+
+  
 const browser = await puppeteer.launch({headless:false});
 const page = await browser.newPage();
 await page.goto('https://www.google.com/travel/flights');
@@ -42,8 +46,9 @@ await page.keyboard.press('End'); // move cursor to the end of the input
 await page.keyboard.down('Shift'); // hold shift key
 for (let i = 0; i < 20; i++) { // delete characters
     await page.keyboard.press('Backspace');
-}
-await page.keyboard.up('Shift'); // release shift key
+  }
+
+  await page.keyboard.up('Shift'); // release shift key
 await page.keyboard.type(destination1)
 await page.keyboard.press('ArrowRight')
 await page.keyboard.press('Enter')    
@@ -76,30 +81,10 @@ await submitButton[0].click();
 await new Promise(resolve => setTimeout(resolve, 2000));
 console.log('before identifying');
 
-const flight = await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[2]/div[5]/ul');
+const flight = await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[2]/div[3]/ul');
 const flightss = await flight[0].$$('li');
 console.log('evaluate method is about to run') 
-// await page.evaluate(async() => {
-//     console.log('evaluate method is running')
-//     const scrollButton:any = document.evaluate('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[2]/div[5]/ul/li[19]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-//     if (await scrollButton) {
-//         console.log('scrollbutton1',await scrollButton)
-//         await  scrollButton.scrollIntoView();
-//         console.log('scrollbutton2',await scrollButton)
-//     await new Promise(resolve => setTimeout(resolve, 2000));
-//       await scrollButton.click()
-      
-//     }
-//     else {
-//         console.log('no scrollbutton found')
-//         return null
-//     }
-//   });
- //const scrollButton = await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[2]/div[5]/ul/li');
- await flightss[21].scrollIntoView()
- await new Promise(resolve => setTimeout(resolve, 1000));
- await flightss[21].click() 
-  await page.waitForNavigation();
+
         console.log('working so far....');
 const file=await fs.open('flightdata.txt','w');
 const stream = await file.createWriteStream();
@@ -165,7 +150,7 @@ stream.end();
     file.close();
 
 await browser.close();
-}
+}}
 
-module.exports=run;
+module.exports=Run;
 
