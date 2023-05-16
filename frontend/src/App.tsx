@@ -3,17 +3,20 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from './components/home.tsx'
-
+import Home from './components/home.js'
+import { AuthContextProvider } from './AuthContext.js'
 function App() {
   return (
     <>
       <>
+      <AuthContextProvider>
+
 <BrowserRouter>
 <Routes>
   <Route path='/' element={<Home/>} />
 </Routes  >
 </BrowserRouter>
+      </AuthContextProvider>
       </>
     
     </>
