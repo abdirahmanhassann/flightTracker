@@ -20,6 +20,8 @@ nav{
   left: 0px;
   background: #05203c;
   font-family: 'Signika Negative', sans-serif;
+  display: flex;
+  justify-content: space-between;
 }
 .rowdiv{
   text-align: justify;
@@ -27,7 +29,7 @@ nav{
     display: flex;
     flex-direction: row;
     gap: 5px;
-    font-size: 30px;
+    font-size: 27px;
     color: white;
     align-items: center;
 }

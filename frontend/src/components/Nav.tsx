@@ -4,7 +4,7 @@ function Nav() {
   return (
     <nav>
         <div className='rowdiv'>
-        <GiAirplaneArrival style={{height:'31px',width:'31px',color:'white'}}/>
+        <GiAirplaneArrival style={{height:'29px',width:'29px',color:'white'}}/>
    <h5>Cheap flight ticket tracker</h5>
         </div>
     </nav>

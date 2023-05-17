@@ -12,15 +12,15 @@ import { ReactNode } from 'react';
 import { createSecureContext } from 'tls';
 import { createRoutesFromChildren } from 'react-router';
 
-const AuthContext = createContext({});
+const AuthContext = createContext(null);
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState(null);
+  const [userr, setUser] = useState(null);
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
     // signInWithPopup(auth, provider);
-    signInWithRedirect(auth, provider)
+    signInWithPopup(auth, provider)
   
   };
 
@@ -39,7 +39,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ googleSignIn, logOut, user }}>
+    <AuthContext.Provider value={{ googleSignIn, logOut, userr }}>
       {children}
     </AuthContext.Provider>
   );

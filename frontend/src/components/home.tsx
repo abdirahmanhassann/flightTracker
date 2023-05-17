@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router';
 
 function Home() {
   const navigate=useNavigate()
-  const {logOut, googleSignIn, user } = UserAuth()|| { googleSignIn: () => {}, user: null };
+  const {logOut, googleSignIn, userr } = UserAuth()|| { googleSignIn: () => {}, user: null };
 
   const handleSignOut = async () => {
     try {
@@ -31,10 +31,13 @@ function Home() {
   };
 
   useEffect(() => {
-    if (user != null) {
-      navigate('/');
+    if (userr == null) {
+     navigate('/');
     }
-  }, [user]);
+    else{
+      navigate('/account')
+    }
+  }, [userr]);
 
   return (
     <>
@@ -43,7 +46,7 @@ function Home() {
 <h2 style={{fontSize:'31px'}} >Quickly scan all your favourite travel sites</h2 >
 <div className='columndiv2'>
     <h3>Sign in/ Sign up with Google</h3>
-<Button variant="outlined" onClick={user? handleSignOut: handleGoogleSignIn}>{ user? 'Sign out': 'Sign in'}</Button>
+<Button variant="outlined" onClick={userr? handleSignOut: handleGoogleSignIn}>{ userr? 'Sign out': 'Sign in'}</Button>
 </div>
 </div>
     </>
