@@ -4,7 +4,7 @@ import { UserAuth } from './AuthContext';
 
 const Protected = ({ children }: { children: ReactNode })=> {
   const { userr } = UserAuth() ;
-  console.log(userr)
+  console.log(userr,'userrr')
   if (!userr) {
     return <Navigate to='/' />;
   }

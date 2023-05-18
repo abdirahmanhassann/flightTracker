@@ -1,9 +1,9 @@
-10:05 AM,MGQ,8:35 PM,LHR,TRY 24,582,round trip,1 stop12 hr 30 minTurkish Airlines,-15% emissions
+9:55 PM,LIS,12:35 AM+1,LTN,TRY 4,387,round trip,Nonstop2 hr 40 minWizz Air,Avg emissions
  
  
-12:50 PM,MGQ,12:35 PM+1,LGW,TRY 24,674,round trip,1 stop25 hr 45 minflydubai, Emirates,+6% emissions
+1:00 PM,LIS,3:45 PM,STN,TRY 6,650,round trip,Nonstop2 hr 45 minRyanair,Avg emissions
  
  
-2:15 PM,MGQ,9:05 AM+1,LHR,TRY 24,846,round trip,1 stop20 hr 50 minEthiopian,-22% emissions
+7:05 AM,LIS,9:45 AM,LGW,TRY 9,009,round trip,Nonstop2 hr 40 minTap Air Portugal,+18% emissions
  
  

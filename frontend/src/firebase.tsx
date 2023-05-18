@@ -2,10 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "@firebase/firestore";
 import { getStorage } from "@firebase/storage";// TODO: Add SDKs for Firebase products that you want to use
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyB3qf7dRIqIHHNihy9Uqjqmhp2G9xvtn5E",
     authDomain: "flighttracker-3fbf9.firebaseapp.com",
