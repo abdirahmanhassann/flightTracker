@@ -1,9 +1,3 @@
-9:55 AM,STN,3:35 PM,SAW,TRY 3,671,round trip,Nonstop3 hr 40 minPegasus,Avg emissions
- 
- 
-10:10 AM,LGW,4:15 PM,IST,SEPARATE TICKETS BOOKED TOGETHER,TRY 4,112,round trip,Nonstop4 hr 5 minWizz Air,Avg emissions
- 
- 
-11:10 PM,STN,5:10 AM+1,SAW,TRY 4,573,round trip,Nonstop4 hrTurkish Airlines,Avg emissions
+6:50 AM,SAW,8:50 AM,STN,TRY 5,765,round trip,Nonstop4 hrPegasus,Avg emissions
  
  

@@ -2,7 +2,11 @@
 /// <reference types="node" />
 /// <reference types="puppeteer" />
 
+import { pathToFileURL } from "url";
+
 const puppeteer = require('puppeteer');
+const nodemailer = require("nodemailer");
+ require('dotenv').config()
 
 const fs=require('fs/promises')
 
@@ -18,18 +22,24 @@ price?: number;
 airline?: string;
 flightNumber?:number;
 ticketBooking?:string;
-duration?:string
+duration?:string;
+email?:string;
 }
 
  class Run {
 
-  async returnFlight(destination1:string,destination2:string){
-
+  async returnFlight(destination1:string,destination2:string,budget:number,email:string){
+    const d=destination1;
+    const f=destination2;
+    const y=budget;
+    const e=email;
+    const browser = await puppeteer.launch({headless:false});
+    const page = await browser.newPage();
+    await page.goto('https://www.google.com/travel/flights');
+    try
+{
   
-const browser = await puppeteer.launch({headless:false});
-const page = await browser.newPage();
-await page.goto('https://www.google.com/travel/flights');
-
+    
 // Close popup if it appears
 const closeButton = await page.$('button[aria-label="Close"]');
 if (closeButton) {
@@ -82,13 +92,14 @@ await new Promise(resolve => setTimeout(resolve, 2000));
 console.log('before identifying');
 
 const flight = await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[2]/div[3]/ul');
+                            
 const flightss = await flight[0].$$('li');
 console.log('evaluate method is about to run') 
 
         console.log('working so far....');
 const file=await fs.open('flightdata.txt','w');
 const stream = await file.createWriteStream();
-const arrayofflights:Flight[]=[]
+const arrayofflights:Flight[] |undefined=[]
 
 for (const i of flightss) {
   const textContent = await i.evaluate((node:any) => node.innerText);
@@ -139,17 +150,64 @@ price=Number(price)
   arrayofflights.push(flightObj)
   const buffer = Buffer.from(textLines + '\n \n \n', 'utf-8');
   await stream.write(buffer)
+
+
+  if(arrayofflights[0].price && arrayofflights[0].price<budget){
+    await flightss[0].click()
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+     const po= await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[2]/div[3]/ul/li[1]')
+    await po[0].click()
+     // let urll;
+    const   urll=await page.url()
+      console.log('path not found')
+      console.log(urll)
+    
+    // else{
+    // await flightss[0].click()
+    //    urll=await page.url()
+    //   console.log('path found')
+    //   console.log(urll)
+    //   }
+
+      // First, define send settings by creating a new transporter: 
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com", // SMTP server address (usually mail.your-domain.com)
+    port: 465, // Port for SMTP (usually 465)
+    secure: true, // Usually true if connecting to port 465
+    auth: {
+      user: process.env.email, // Your email address
+      pass: process.env.pass, // Password (for gmail, your app password)
+      // ⚠️ For better security, use environment variables set on the server for these values when deploying
+    },
+    tls: {
+      rejectUnauthorized: false, // Bypass certificate validation
+    },
+  });
+   await transporter.sendMail({
+    from: process.env.email,
+    to:email,
+    subject: "Flight found",
+    html: `
+    <h1>A flight under ${budget} from ${destination1} to ${destination2} found!</h1>
+    <p>${urll}</p>
+    `,
+  });
+console.log('email has been sent');
+  }
   
-  console.log(flightObj)
+  stream.end();
+  file.close();
+  await browser.close();
   
+  return arrayofflights;
+  }
 }
-
-//console.log(arrayofflights)
-
-stream.end();
-    file.close();
-
-await browser.close();
+catch(e){
+  console.log(e)
+ // this.returnFlight(d,f,y)
+  await browser.close()
+}
 }}
 
 module.exports=Run;

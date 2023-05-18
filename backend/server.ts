@@ -15,19 +15,26 @@ function runqueries(){
 
 async function fb(){
    const document = await db.collection('users').get();
-  const g=document.docs.map((doc:any)=>doc.data())
- g.forEach((i:any)=>{
-    i.queries.forEach( async(element:any) => {
-       if(element.from && element.to ){
-         let newflight= new returnFlight();
-        await newflight.returnFlight(element.from.trim(),element.to.trim())
-
-      }
-    });
-
- }) 
-   console.log(g[0].queries);
-   console.log(g.id)
+  const g=document.docs.map((doc:any)=>{return{...doc.data(),id:doc.id}})
+ // const emails=document.docs.map((doc:any)=>doc.id)
+console.log(g)
+  for (const item of g) {
+   console.log(item,item.id,'item')
+   //console.log(email)
+   if (item.queries) {
+     for (const element of item.queries) {
+       if (element.from && element.to) {
+         let newflight = new returnFlight();
+        let budget;
+    
+        while(!budget){
+         budget= await newflight.returnFlight(element.from.trim(), element.to.trim(),element.budget,item.id);
+        }
+          
+       }
+     }
+   }
+ }
 }
 fb()
 // app.listen(5000,()=>{
