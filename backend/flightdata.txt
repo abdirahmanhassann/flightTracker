@@ -1,9 +1,9 @@
-9:55 PM,LIS,12:35 AM+1,LTN,TRY 4,387,round trip,Nonstop2 hr 40 minWizz Air,Avg emissions
+9:55 AM,STN,3:35 PM,SAW,TRY 3,671,round trip,Nonstop3 hr 40 minPegasus,Avg emissions
  
  
-1:00 PM,LIS,3:45 PM,STN,TRY 6,650,round trip,Nonstop2 hr 45 minRyanair,Avg emissions
+10:10 AM,LGW,4:15 PM,IST,SEPARATE TICKETS BOOKED TOGETHER,TRY 4,112,round trip,Nonstop4 hr 5 minWizz Air,Avg emissions
  
  
-7:05 AM,LIS,9:45 AM,LGW,TRY 9,009,round trip,Nonstop2 hr 40 minTap Air Portugal,+18% emissions
+11:10 PM,STN,5:10 AM+1,SAW,TRY 4,573,round trip,Nonstop4 hrTurkish Airlines,Avg emissions
  
  
