@@ -1,6 +1,3 @@
-import { Query } from "firebase-admin/firestore";
-import { firestore } from "firebase-functions/v1";
-const { getFirestore, collection, getDoc, doc} = require("firebase/firestore");
 
 const express=require('express');
 const returnFlight=require('./returnFlight');
@@ -10,7 +7,7 @@ const app=express()
 function runqueries(){
 
    const newfligh= new returnFlight();
-   newfligh.returnFlight('lisbon','london')
+  // newfligh.returnFlight('lisbon','london')
 }
 
 async function fb(){
@@ -36,7 +33,16 @@ console.log(g)
    }
  }
 }
-fb()
+//fb()
+async function testing(){
+  let count;
+  while(!count){
+    const newfligh= new returnFlight();
+    count= await newfligh.returnFlight('lisbon','london',100,'popoeski@gmail','One way')
+  }
+
+}
+testing()
 // app.listen(5000,()=>{
 //    console.log('app is listening on port 5000....')
 // })

@@ -78,6 +78,7 @@ await new Promise(resolve => setTimeout(resolve,3000));
 const dropdownn=await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div[1]/div[1]/div/div[1]/div[1]')
 await dropdownn[0].click();
 await new Promise(resolve => setTimeout(resolve, 2000));
+console.log('before choosing type')
   if(type==='Returning'){
     const returning=await page.$x('//*[@id="ow32"]/div[2]/div[2]/ul/li[1]');
 await returning[0].click()
@@ -118,13 +119,16 @@ await page.keyboard.up('Shift');
 await page.keyboard.type(destination2)
 await page.keyboard.press('ArrowRight')
 await page.keyboard.press('Enter')    
-await page.$eval('#yDmH0d > c-wiz.zQTmif.SSPGKf > div > div:nth-child(2) > c-wiz > div.cKvRXe > c-wiz > div.vg4Z0e > div:nth-child(1) > div.SS6Dqf.POQx1c > div.AJxgH > div > div.rIZzse > div.bgJkKe.K0Tsu > div > div > div.cQnuXe.k0gFV > div > div > div:nth-child(1) > div > div.oSuIZ.YICvqf.kStSsc.ieVaIb > div > input',
-(el:any, value:any) => el.value = value, '25/07/2023')
-await page.$eval('#yDmH0d > c-wiz.zQTmif.SSPGKf > div > div:nth-child(2) > c-wiz > div.cKvRXe > c-wiz > div.vg4Z0e > div:nth-child(1) > div.SS6Dqf.POQx1c > div.AJxgH > div > div.rIZzse > div.bgJkKe.K0Tsu > div > div > div.cQnuXe.k0gFV > div > div > div:nth-child(1) > div > div.oSuIZ.YICvqf.lJODHb.qXDC9e > div > input',
-(el:any, value:any) => el.value = value, '25/10/2023')
 await new Promise(resolve => setTimeout(resolve, 1000))
-
-
+if(type==='One way'){
+  const date=await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div[1]/div[1]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div/input')
+  await date[0].click();
+  await page.keyboard.type('20/09/2023')
+  await page.keyboard.press('Enter')
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  await page.keyboard.press('Enter')
+await new Promise(resolve => setTimeout(resolve, 1000))
+}
 const submitButton = await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/button');
 await submitButton[0].click();
 
@@ -139,7 +143,7 @@ console.log('evaluate method is about to run')
         console.log('working so far....');
 const file=await fs.open('flightdata.txt','w');
 const stream = await file.createWriteStream();
-const arrayofflights:Flight[] |undefined=[]
+const arrayofflights:Flight[] | undefined=[];
 
 for (const i of flightss) {
   const textContent = await i.evaluate((node:any) => node.innerText);
@@ -243,6 +247,7 @@ return arrayofflights;
 }
 catch(e){
   console.log(e)
+ 
   await browser.close()
 }
 }}
