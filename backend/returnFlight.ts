@@ -45,7 +45,35 @@ const closeButton = await page.$('button[aria-label="Close"]');
 if (closeButton) {
   await closeButton.click();
 }
+const currency=await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[3]/c-wiz/footer/div[1]/c-wiz/button[3]')
+await currency[0].scrollIntoView()
+await currency[0].click();
 
+await new Promise(resolve => setTimeout(resolve,2000));
+
+const modal = await page.$x('//*[@id="yDmH0d"]/div[5]/div[1]/div[3]/div/div[1]/div/div[1]/div/div/div/div[1]/div');
+
+if (await modal.length > 0) {
+  const gbpElement = await modal[0].$x('.//*[contains(text(), "British Pound")]');
+
+  if (await gbpElement.length > 0) {
+    await gbpElement[0].scrollIntoView();
+    await gbpElement[0].click();
+  } else {
+    console.log('Element containing "GBP" not found within the modal.');
+  }
+} else {
+  console.log('Modal not found.');
+}
+
+// const gbp=await page.$x('//*[@id="yDmH0d"]/div[7]/div[1]/div[3]/div/div[1]/div/div[1]/div/div/div/div[1]/div/label[14]')
+// await gbp[0].scrollIntoView()
+// await gbp[0].click();
+await new Promise(resolve => setTimeout(resolve,1000));
+
+const continuee=await page.$x('//*[@id="yDmH0d"]/div[5]/div[1]/div[3]/div/div[2]/div/div[2]/div[2]/div/button')
+await continuee[0].click();
+await new Promise(resolve => setTimeout(resolve,3000));
 
 const dropdownn=await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div[1]/div[1]/div/div[1]/div[1]')
 await dropdownn[0].click();
@@ -54,15 +82,15 @@ await new Promise(resolve => setTimeout(resolve, 2000));
     const returning=await page.$x('//*[@id="ow32"]/div[2]/div[2]/ul/li[1]');
 await returning[0].click()
 }
-else if(type==='One way'){
+else{
     const returning=await page.$x('//*[@id="ow32"]/div[2]/div[2]/ul/li[2]');
     await returning[0].click()
     
   }
-  else{
-    const returning=await page.$x('//*[@id="ow32"]/div[2]/div[2]/ul/li[3]');
-    await returning[0].click()
-  }
+  // else{
+  //   const returning=await page.$x('//*[@id="ow32"]/div[2]/div[2]/ul/li[3]');
+  //   await returning[0].click()
+  // }
   
   await new Promise(resolve => setTimeout(resolve, 2000));
 const input = await page.$x('//*[@id="i15"]/div[1]/div/div/div[1]/div/div/input');
@@ -94,7 +122,8 @@ await page.$eval('#yDmH0d > c-wiz.zQTmif.SSPGKf > div > div:nth-child(2) > c-wiz
 (el:any, value:any) => el.value = value, '25/07/2023')
 await page.$eval('#yDmH0d > c-wiz.zQTmif.SSPGKf > div > div:nth-child(2) > c-wiz > div.cKvRXe > c-wiz > div.vg4Z0e > div:nth-child(1) > div.SS6Dqf.POQx1c > div.AJxgH > div > div.rIZzse > div.bgJkKe.K0Tsu > div > div > div.cQnuXe.k0gFV > div > div > div:nth-child(1) > div > div.oSuIZ.YICvqf.lJODHb.qXDC9e > div > input',
 (el:any, value:any) => el.value = value, '25/10/2023')
-await new Promise(resolve => setTimeout(resolve, 1000));
+await new Promise(resolve => setTimeout(resolve, 1000))
+
 
 const submitButton = await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/button');
 await submitButton[0].click();
@@ -131,17 +160,17 @@ airline=textLines[6].substring(textLines[6].indexOf('hr') + 2);
 
 }
 
-if(textLines[5]&& textLines[5].includes('TRY')){
+if(textLines[5]&& textLines[5].includes('£')){
 price=textLines[5]
 booking=textLines[4]
-price=price.substring(price.indexOf('TRY')+4).replace(',','')
+price=price.substring(price.indexOf('£')+2).replace(',','')
 price=Number(price)
 }
-else if(textLines[4]&& textLines[4].includes('TRY')){
+else if(textLines[4]&& textLines[4].includes('£')){
 price=textLines[4]
 booking=textLines[5]
 
-price=price.substring(price.indexOf('TRY')+4).replace(',','')
+price=price.substring(price.indexOf('£')+2).replace(',','')
 price=Number(price)
 }
 
@@ -166,7 +195,16 @@ price=Number(price)
     await new Promise(resolve => setTimeout(resolve, 3000));
 
      const po= await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[2]/div[3]/ul/li[1]')
-    await po[0].click()
+
+  if(po[0] && !po[0].click()){
+    sendemail()
+  }
+else{
+  sendemail()
+}
+   async function sendemail(){
+
+    
     const   urll=await page.url()
       console.log('path not found')
       console.log(urll)
@@ -195,13 +233,13 @@ price=Number(price)
   });
 console.log('email has been sent');
   }
-  
-  stream.end();
-  file.close();
-  await browser.close();
-  
-  return arrayofflights;
-  }
+}
+await stream.end();
+await file.close();
+await browser.close();
+
+return arrayofflights;
+}
 }
 catch(e){
   console.log(e)
