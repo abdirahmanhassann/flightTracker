@@ -1,7 +1,7 @@
-import React,{useEffect, useRef, useState} from 'react'
+import {useEffect, useState} from 'react'
 import { GiAirplaneArrival } from 'react-icons/gi'
 import { RiLogoutBoxLine } from 'react-icons/ri'
-import { Input, InputAdornment, TextField,OutlinedInput,FormHelperText } from '@mui/material'
+import { Input, InputAdornment, TextField } from '@mui/material'
 import AddLocationIcon from '@mui/icons-material/AddLocation';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import Button from '@mui/material/Button';
@@ -9,12 +9,11 @@ import { UserAuth } from './AuthContext'
 import { arrayRemove, arrayUnion, collection, doc, getDocs, setDoc, 
     updateDoc } from "@firebase/firestore";
 import { db } from './firebase'
-import {  } from '@material-ui/core';
 import { useNavigate } from 'react-router';
 import { v4 as uuidv4 } from 'uuid';
 
 
-import {AiFillEdit,AiFillDelete } from 'react-icons/ai';
+import {AiFillDelete } from 'react-icons/ai';
 interface Iinfo{
     from:string;
     to:string;
@@ -22,8 +21,10 @@ interface Iinfo{
     budget:number;
     id:string;
 }
+
 interface QueryObject {
     queries: Iinfo[];
+    length:number,
   }
   
 function Account() {
@@ -36,7 +37,7 @@ function Account() {
     budget:0,
     id:''
 } )
-const [queriess,setqueries]=useState<QueryObject>([])
+const [queriess,setqueries]=useState<any>()
     const [error,seterror]=useState(false)
     const [sent,setsent]=useState(false)
  //console.log(userr.email)
@@ -55,7 +56,7 @@ useEffect(()=>{
         const  usersCollectionRef= await collection (db,'users')
         const po=  await getDocs(usersCollectionRef)
         const  userss= await po.docs.map((i)=>{return{...i.data(),id:i.id}})
-        const check=  userss.find(i=>userr.email===i.id)
+        const check:any=  userss.find(i=>userr.email===i.id)
         console.log(check)
      if(check!==undefined){
          setqueries(check?.queries)
@@ -194,8 +195,8 @@ onClick={clicked}
           <div className='columndiv'>
 {
 
-    queriess && queriess.length>0 &&
-    queriess.map((i)=>{
+    queriess && queriess?.length>0 &&
+    queriess?.map((i)=>{
         return(
     <div className='rowdiv'
      style={{    background: 'white',

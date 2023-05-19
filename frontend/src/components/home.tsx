@@ -1,7 +1,6 @@
-import { Typography } from '@material-ui/core';
 import Button from '@mui/material/Button';
  
-import React, { useEffect } from 'react'
+import  { useEffect } from 'react'
 import Nav from './Nav';
 import { UserAuth } from '../AuthContext';
 import { useNavigate } from 'react-router';
