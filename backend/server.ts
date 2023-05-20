@@ -33,16 +33,16 @@ console.log(g)
    }
  }
 }
-//fb()
+fb()
 async function testing(){
   let count;
   while(!count){
     const newfligh= new returnFlight();
-    count= await newfligh.returnFlight('lisbon','london',100,'popoeski@gmail','One way')
+    count= await newfligh.returnFlight('lisbon','london',100,'popoeski@gmail.com','Returning')
   }
 
 }
-testing()
 // app.listen(5000,()=>{
+
 //    console.log('app is listening on port 5000....')
 // })

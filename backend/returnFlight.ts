@@ -75,25 +75,16 @@ const continuee=await page.$x('//*[@id="yDmH0d"]/div[5]/div[1]/div[3]/div/div[2]
 await continuee[0].click();
 await new Promise(resolve => setTimeout(resolve,3000));
 
-const dropdownn=await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div[1]/div[1]/div/div[1]/div[1]')
-await dropdownn[0].click();
-await new Promise(resolve => setTimeout(resolve, 2000));
 console.log('before choosing type')
-  if(type==='Returning'){
-    const returning=await page.$x('//*[@id="ow32"]/div[2]/div[2]/ul/li[1]');
-await returning[0].click()
-}
-else{
+if(type==='One way'){
+    const dropdownn=await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div[1]/div[1]/div/div[1]/div[1]')
+    await dropdownn[0].click();
+    await new Promise(resolve => setTimeout(resolve, 1000));
     const returning=await page.$x('//*[@id="ow32"]/div[2]/div[2]/ul/li[2]');
     await returning[0].click()
-    
+    await new Promise(resolve => setTimeout(resolve, 2000));
   }
-  // else{
-  //   const returning=await page.$x('//*[@id="ow32"]/div[2]/div[2]/ul/li[3]');
-  //   await returning[0].click()
-  // }
-  
-  await new Promise(resolve => setTimeout(resolve, 2000));
+ 
 const input = await page.$x('//*[@id="i15"]/div[1]/div/div/div[1]/div/div/input');
 await input[0].click();
 await page.keyboard.press('End');
@@ -123,12 +114,31 @@ await new Promise(resolve => setTimeout(resolve, 1000))
 if(type==='One way'){
   const date=await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div[1]/div[1]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div/input')
   await date[0].click();
+  await new Promise(resolve => setTimeout(resolve, 1000))
   await page.keyboard.type('20/09/2023')
   await page.keyboard.press('Enter')
   await new Promise(resolve => setTimeout(resolve, 1000))
   await page.keyboard.press('Enter')
 await new Promise(resolve => setTimeout(resolve, 1000))
 }
+else{
+  await new Promise(resolve => setTimeout(resolve, 1000))
+ const date1=await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div[1]/div[1]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div/input')
+ await date1[0].click();
+ await new Promise(resolve => setTimeout(resolve, 1000))
+ await page.keyboard.type('20/09/2023')
+ await page.keyboard.press('Enter')
+ await new Promise(resolve => setTimeout(resolve, 1000))
+ await page.keyboard.press('Enter')
+ await new Promise(resolve => setTimeout(resolve, 1000))
+ const date2=await page.$x('//*[@id="ow75"]/div[1]/div/div/div[1]/div/div[2]/div/input')
+ await date2[0].click();
+ await page.keyboard.type('20/10/2023')
+ await page.keyboard.press('Enter')
+ await new Promise(resolve => setTimeout(resolve, 1000))
+ await page.keyboard.press('Enter')
+ await new Promise(resolve => setTimeout(resolve, 1000))
+ }
 const submitButton = await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/button');
 await submitButton[0].click();
 
@@ -190,30 +200,29 @@ price=Number(price)
 
 
   arrayofflights.push(flightObj)
-  const buffer = Buffer.from(textLines + '\n \n \n', 'utf-8');
-  await stream.write(buffer)
-
-
+}
   if(arrayofflights[0].price && arrayofflights[0].price<budget){
     await flightss[0].click()
     await new Promise(resolve => setTimeout(resolve, 3000));
 
      const po= await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[2]/div[3]/ul/li[1]')
 
-  if(po[0] && !po[0].click()){
+  if(await po[0] &&await po[0].click() ){
+   await po[0].click()
     sendemail()
+    console.log('path found')
   }
 else{
   sendemail()
+  console.log('path not found')
 }
    async function sendemail(){
 
     
     const   urll=await page.url()
-      console.log('path not found')
-      console.log(urll)
+      console.log('url', urll)
 
-      let transporter = nodemailer.createTransport({
+      let transporter = await nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465, 
     secure: true, 
@@ -244,7 +253,7 @@ await browser.close();
 
 return arrayofflights;
 }
-}
+
 catch(e){
   console.log(e)
  
