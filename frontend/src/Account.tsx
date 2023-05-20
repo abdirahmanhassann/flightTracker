@@ -11,15 +11,22 @@ import { arrayRemove, arrayUnion, collection, doc, getDocs, setDoc,
 import { db } from './firebase'
 import { useNavigate } from 'react-router';
 import { v4 as uuidv4 } from 'uuid';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import 'dayjs/locale/en-gb';
+
 
 
 import {AiFillDelete } from 'react-icons/ai';
+import { DateField, DateValidationError, LocalizationProvider } from '@mui/x-date-pickers';
+import { FieldChangeHandler } from '@mui/x-date-pickers/internals';
 interface Iinfo{
     from:string;
     to:string;
     type:string;
     budget:number;
     id:string;
+    dateTo:string;
+    dateFrom:string;
 }
 
 interface QueryObject {
@@ -35,8 +42,10 @@ function Account() {
     to:'',
     type:'',
     budget:0,
-    id:''
-} )
+    id:'',
+    dateFrom: '', // initialize with current date or the desired default date
+    dateTo: '', // optional property can be undefined initially
+  } )
 const [queriess,setqueries]=useState<any>()
     const [error,seterror]=useState(false)
     const [sent,setsent]=useState(false)
@@ -66,6 +75,8 @@ useEffect(()=>{
 renderr()
 },[sent])
  function changed(e:any){
+    
+    console.log(e.target.name)
     seterror(false)
     setinfo((i:any)=>
    { return{
@@ -74,9 +85,31 @@ renderr()
     }})
     console.log(info)
  }
+ const handleChangeDateTo = (newDate: Date) => {
+     const dateObject = new Date(newDate);
+     const formattedDate = `${dateObject.getDate()}-${dateObject.getMonth() + 1}-${dateObject.getFullYear()}`;
+     console.log(formattedDate)
+      setinfo((prevInfo) => ({
+        ...prevInfo,
+        dateTo: formattedDate
+      }));
+    };
+
+  const handleChangeDateFrom = (newDate: Date) => {
+    const dateObject = new Date(newDate);
+    const formattedDate = `${dateObject.getDate()}-${dateObject.getMonth() + 1}-${dateObject.getFullYear()}`;
+    console.log(formattedDate)
+
+      setinfo((prevInfo) => ({
+        ...prevInfo,
+        dateFrom: formattedDate
+      }));
+    console.log(info)
+  };
 
 async function clicked(){
-    if(info.from && info.to && info.type &&info.budget){
+    if(info.from && info.to && info.type &&info.budget && info.dateTo && info.dateFrom){
+        console.log(info)
         try{
             console.log('runnng function')
          const info2=info;
@@ -89,7 +122,10 @@ async function clicked(){
                     to:'',
                     type:'',
                     budget:0,
-                    id:''
+                    id:'',
+                    dateFrom: null, // initialize with current date or the desired default date
+                    dateTo: null// optional property can be undefined initially
+                  
                 })
                 setsent(i=>!i)
             }
@@ -127,7 +163,7 @@ return (
         error &&
         <p>Please fill in all the information</p>
     }
-    <form className='rowdiv' 
+    <div className='rowdiv' 
     style={{marginTop: '100px',
     placeContent:' center',
     flexWrap:'wrap'}}> 
@@ -187,10 +223,39 @@ value={info && info.from}
 }} 
 />
 
-<Button variant="contained" sx={{backgroundColor:'white',color:'darkblue',padding:'14px 27px'}}
-onClick={clicked}
->Save Query</Button>
-          </form>
+          </div>
+          <div className='rowdiv' 
+    style={{marginTop: '100px',
+    placeContent:' center',
+    flexWrap:'wrap'}}> 
+        {/* @ts-ignore */}
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb"
+        >
+<DateField label="From" 
+format='DD-MM-YYYY'
+disablePast={true}
+onChange={(newDate:Date) => handleChangeDateFrom(newDate)}
+      //  value={info?.dateFrom}
+ sx={{width:'150px',background:'white',height:'52px',borderRadius:'2px 2px 0px 0px'}} />
+</LocalizationProvider>
+{
+    
+info?.type!=='One way' &&
+  /* @ts-ignore */
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb"
+    >
+<DateField label="To" 
+format='DD-MM-YYYY'
+disablePast={true}
+onChange={(newDate:Date) => handleChangeDateTo(newDate)}
+//value={info?.dateTo}
+ sx={{width:'150px',background:'white',height:'52px',borderRadius:'2px 2px 0px 0px'}} />
+</LocalizationProvider>
+}
+    <Button variant="contained" sx={{backgroundColor:'white',color:'darkblue',padding:'14px 27px'}}
+    onClick={clicked}
+    >Save Query</Button>
+          </div>
           <p>Saved Queries</p>
           <div className='columndiv'>
 {
@@ -210,14 +275,13 @@ onClick={clicked}
         
         {/* <AiFillEdit style={{width:'29px',height:'29px',color:'#00091d',marginLeft:'10px',cursor:'pointer'}}/> */}
         <AiFillDelete style={{width:'29px',height:'29px',color:'#00091d',marginLeft:'10px',cursor:'pointer'}}
-        onClick={()=>deletee(i)}
-        
-        />
+        onClick={()=>deletee(i)}/>
     </div>
 )
     })
 }
-          </div>
+
+   </div>
     </>
   )
 }

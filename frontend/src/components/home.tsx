@@ -45,7 +45,8 @@ function Home() {
 <h2 style={{fontSize:'31px'}} >Quickly scan all your favourite travel sites</h2 >
 <div className='columndiv2'>
     <h3>Sign in/ Sign up with Google</h3>
-<Button variant="outlined" onClick={userr? handleSignOut: handleGoogleSignIn}>{ userr? 'Sign out': 'Sign in'}</Button>
+<Button variant="outlined" onClick={userr? handleSignOut: handleGoogleSignIn}
+style={{cursor:'pointer'}}>{ userr? 'Sign out': 'Sign in'}</Button>
 </div>
 </div>
     </>
