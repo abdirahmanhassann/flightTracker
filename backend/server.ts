@@ -25,7 +25,16 @@ console.log(g)
         let budget;
     
         while(!budget){
-         budget= await newflight.returnFlight(element.from.trim(), element.to.trim(),element.budget,item.id,element.type);
+         budget= await newflight
+         .returnFlight(element.from.trim()
+         , element.to.trim(),
+         element.budget
+         ,item.id,
+         element.type,
+         element.dateFrom,
+         element.dateTo
+         
+         );
         }
           
        }

@@ -28,13 +28,24 @@ email?:string;
 
  class Run {
 
-  async returnFlight(destination1:string,destination2:string,budget:number,email:string,type:string){
-    const d=destination1;
-    const f=destination2;
-    const y=budget;
-    const e=email;
-    const t=type
-    let count=0;
+  async returnFlight(
+    destination1:string,
+    destination2:string,
+    budget:number,
+    email:string,
+    type:string,
+    dateTo:string,
+    dateFrom:string
+    ){
+      
+ function swap(date:string):string{
+   const parts = date.split("-");
+   const day = parts[0];
+        const month = parts[1];
+        const year = parts[2];
+        const swappedDateStr = `${month}-${day}-${year}`;
+        return swappedDateStr;
+ }
     const browser = await puppeteer.launch({headless:false});
     const page = await browser.newPage();
     await page.goto('https://www.google.com/travel/flights');
@@ -115,7 +126,7 @@ if(type==='One way'){
   const date=await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div[1]/div[1]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div/input')
   await date[0].click();
   await new Promise(resolve => setTimeout(resolve, 1000))
-  await page.keyboard.type('20/09/2023')
+  await page.keyboard.type(swap(dateTo).replace(/-/g, "/"))
   await page.keyboard.press('Enter')
   await new Promise(resolve => setTimeout(resolve, 1000))
   await page.keyboard.press('Enter')
@@ -126,14 +137,16 @@ else{
  const date1=await page.$x('//*[@id="yDmH0d"]/c-wiz[2]/div/div[2]/c-wiz/div[1]/c-wiz/div[2]/div[1]/div[1]/div[1]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/div/div[1]/div/input')
  await date1[0].click();
  await new Promise(resolve => setTimeout(resolve, 1000))
- await page.keyboard.type('20/09/2023')
+ await page.keyboard.type(swap(dateTo).replace(/-/g, "/"))
+ await new Promise(resolve => setTimeout(resolve, 1000))
  await page.keyboard.press('Enter')
  await new Promise(resolve => setTimeout(resolve, 1000))
  await page.keyboard.press('Enter')
  await new Promise(resolve => setTimeout(resolve, 1000))
  const date2=await page.$x('//*[@id="ow75"]/div[1]/div/div/div[1]/div/div[2]/div/input')
  await date2[0].click();
- await page.keyboard.type('20/10/2023')
+ await page.keyboard.type(swap(dateFrom).replace(/-/g, "/"))
+ await new Promise(resolve => setTimeout(resolve, 1000))
  await page.keyboard.press('Enter')
  await new Promise(resolve => setTimeout(resolve, 1000))
  await page.keyboard.press('Enter')
